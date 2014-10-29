@@ -1,0 +1,117 @@
+﻿<!--
+Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
+-->
+@model O365_APIs_Start_ASPNET_MVC.Models.CalendarEvent
+
+@{
+    ViewBag.Title = "Create";
+}
+<h1>Calendar</h1>
+<h3>Create event</h3>
+<div>
+    @Html.ActionLink("Discard this and take me back to the list", "Index")
+</div>
+
+@using (Html.BeginForm())
+{
+
+    <hr />
+    <br />
+
+    @Html.ValidationSummary(true)
+
+    <div class="form">
+
+        <form class="form-horizontal">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Subject, new { @class = "control-label col-xs-2" })
+                @Html.EditorFor(model => model.Subject, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Subject)
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Location, new { @class = "control-label col-xs-2" })
+                @Html.EditorFor(model => model.Location, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Location)
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartDate, new { @class = "control-label col-xs-2" })
+                @Html.EditorFor(model => model.StartDate, new { @class = "form-control col-xs-10" })
+                @Html.ValidationMessageFor(model => model.StartDate)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndDate, new { @class = "control-label col-xs-2" })
+                @Html.EditorFor(model => model.EndDate, new { @class = "form-control col-xs-10" })
+                @Html.ValidationMessageFor(model => model.EndDate)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Body, new { @class = "control-label col-xs-2" })
+                @Html.EditorFor(model => model.Body, new { @class = "form-control col-xs-10" })
+                @Html.ValidationMessageFor(model => model.Body)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Attendees, new { @class = "control-label col-xs-2" })
+                @Html.EditorFor(model => model.Attendees, new { @class = "form-control col-xs-10" })
+                @Html.ValidationMessageFor(model => model.Attendees)
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+
+        </form>
+    </div>
+}
+
+<script>
+    $('#StartDate').datetimepicker();
+    $('#EndDate').datetimepicker();
+</script>
+
+@section Scripts
+    {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<!--
+*********************************************************
+
+O365 APIs Starter Project for ASPNET MVC, https://github.com/OfficeDev/Office-365-APIs-Starter-Project-for-ASPNETMVC
+
+Copyright (c) Microsoft Corporation
+All rights reserved.
+
+MIT License:
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+""Software""), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+*********************************************************
+-->
+
+
+

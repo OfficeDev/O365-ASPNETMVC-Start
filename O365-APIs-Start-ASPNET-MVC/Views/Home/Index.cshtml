@@ -1,0 +1,69 @@
+﻿<!--
+Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
+-->
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="main">
+    <br />
+    <p>
+        This sample uses the <strong><a href="http://msdn.microsoft.com/en-us/office/office365/howto/platform-development-overview">Office 365 API</a></strong> client libraries to illustrate basic operations against the Calendar, Contacts, and Mail
+        service endpoints in Office 365. It also demonstrates how to enable single sign-on and authenticate against multiple Office 365 services
+        in your app.
+    </p>
+    <br />
+    <br />
+    <p>To run this sample you'll need to perform the following steps detailed in the sample readme:</p>
+    <br />
+    <ol>
+        <li><p>Have the O365 API Tools installed</p></li>
+        <li><p>Register and configure the app to consume Office 365 services</p></li>
+        <li><p>Get your O365 tenant ID from Microsoft Azure</p></li>
+    </ol>
+            
+    <br />
+    <br />
+    <p>The readme file is in the solution (README.MD), and you can also view it online at <strong><a href="http://aka.ms/o365-apis-start-aspnet">Office 365 Starter Project Readme. </a></strong></p>
+    <br />
+    <br />
+
+    <div class="mainButtons">
+        <button id="calendarButton" type="button" class="btn btn-lg btn-primary" onclick="location.href='@Url.Action("Index", "Calendar")'">Calendar</button>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <button id="contactsButton" type="button" class="btn btn-lg btn-primary" onclick="location.href='@Url.Action("Index", "Contact")'">Contacts</button>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <button id="emailButton" type="button" class="btn btn-lg btn-primary" onclick="location.href='@Url.Action("Index", "Mail")'">Email</button>
+    </div>
+</div>
+<!--
+*********************************************************
+
+O365 APIs Starter Project for ASPNET MVC, https://github.com/OfficeDev/Office-365-APIs-Starter-Project-for-ASPNETMVC
+
+Copyright (c) Microsoft Corporation
+All rights reserved.
+
+MIT License:
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+""Software""), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+*********************************************************
+-->
