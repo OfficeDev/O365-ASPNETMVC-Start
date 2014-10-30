@@ -6,7 +6,8 @@
 - [Prerequisites and Configuration](#prerequisites)
 - [Build](#build)
 - [Project Files of Interest](#project)
-- [License](https://github.com/OfficeDev/Office-365-APIs-Starter-Project-for-ASPNETMVC/blob/master/LICENSE.TXT)
+- [Troubleshooting](#troubleshooting)
+- [License](https://github.com/OfficeDev/Office-365-APIs-Starter-Project-for-ASPNETMVC/blob/master/LICENSE.txt)
 
 ## Overview ##
 
@@ -96,7 +97,7 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
 	 `private static string _authority = "https://login.windows.net/g80f86bc-4df0-8wxb-cf96-673d5bca01ad";`
   7. You are now ready to build the project.
   
-Note: If you are deploying to a production tenant, you will need to ask your Tenant admin for the tenant identifier.
+Note: If you are deploying to a production tenant, you will need to ask your tenant admin for the tenant identifier.
   
 ## Build ##
 
@@ -126,7 +127,7 @@ Run the solution and sign in with your organizational account to Office 365.
 
 **Utils Folder** 
    - AADAppSettings.cs
-   - NaiveSessionCache.cs
+   - NaiveSessionCache.cs - This is a sample token cache and should not be used in a production environment. We suggest that you store and interact with tokens in accordance with the security policy of your organization. 
 
 **Views**
    - Calendar/Create.cshtml
@@ -148,6 +149,10 @@ Run the solution and sign in with your organizational account to Office 365.
    - web.config
    - Startup.cs
    - packages.config
+
+## Troubleshooting ##
+
+If you see any errors while installing packages, for example, *Unable to find "Microsoft.Azure.ActiveDirectory.GraphClient" version="1.0.21"*, make sure the local path where you placed the solution is not too long/deep. Moving the solution closer to the root of your drive resolves this issue. We'll also work on shortening the folder names in a future update.  
 
 ## Copyright ##
 
