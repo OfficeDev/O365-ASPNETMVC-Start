@@ -9,6 +9,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Utils
     /// A basic token cache using current session
     /// ADAL will automatically save tokens in the cache whenever you obtain them.  
     /// More details here: http://www.cloudidentity.com/blog/2014/07/09/the-new-token-cache-in-adal-v2/
+    /// !!! NOTE: DO NOT USE THIS IN PRODUCTION. A MORE PERSISTENT CACHE SUCH AS A DATABASE IS RECOMMENDED FOR PRODUCTION USE !!!!
     /// </summary>
     public class NaiveSessionCache : TokenCache
     {
