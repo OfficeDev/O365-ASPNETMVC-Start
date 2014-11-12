@@ -1,4 +1,4 @@
-# Office 365 Starter Project for ASP.NET MVC #
+﻿# Office 365 Starter Project for ASP.NET MVC #
 
 **Table of Contents**
 
@@ -40,7 +40,7 @@ Below are the operations that you can perform with this sample:
 
 This sample requires the following:
   - Visual Studio 2013 with Update 3.
-  - [Microsoft Office 365 API Tools version 1.2.41027.2](http://visualstudiogallery.msdn.microsoft.com/7e947621-ef93-4de7-93d3-d796c43ba34f). 
+  - [Microsoft Office 365 API Tools version 1.2.41027.2](https://visualstudiogallery.msdn.microsoft.com/a15b85e6-69a7-4fdf-adda-a38066bb5155). 
   - An [Office 365 developer site](https://portal.office.com/Signup/Signup.aspx?OfferId=6881A1CB-F4EB-4db3-9F18-388898DAF510&DL=DEVELOPERPACK&ali=1).
   - A subscription to [Microsoft Azure](http://azure.microsoft.com/en-us/)
 
@@ -54,7 +54,7 @@ Follow these steps to configure the sample.
 
 ### Register app to consume Office 365 APIs ###
 
-You can do this via the Office 365 API Tools for Visual Studio (which automates the registration process). Be sure to download and install the [Office 365 API tools](http://visualstudiogallery.msdn.microsoft.com/7e947621-ef93-4de7-93d3-d796c43ba34f) from the Visual Studio Gallery.
+You can do this via the Office 365 API Tools for Visual Studio (which automates the registration process). Be sure to download and install the [Office 365 API tools](https://visualstudiogallery.msdn.microsoft.com/a15b85e6-69a7-4fdf-adda-a38066bb5155) from the Visual Studio Gallery.
 
    1. Build the project. This will restore the NuGet packages for this solution. 
    2. In the Solution Explorer window, choose O365-APIs-Start-ASPNET-MVC project -> Add -> Connected Service.
