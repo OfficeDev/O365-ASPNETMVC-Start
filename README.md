@@ -43,6 +43,7 @@ This sample requires the following:
   - [Microsoft Office 365 API Tools version 1.3.41104.1](https://visualstudiogallery.msdn.microsoft.com/a15b85e6-69a7-4fdf-adda-a38066bb5155). 
   - An [Office 365 developer site](https://portal.office.com/Signup/Signup.aspx?OfferId=6881A1CB-F4EB-4db3-9F18-388898DAF510&DL=DEVELOPERPACK&ali=1).
   - A subscription to [Microsoft Azure](http://azure.microsoft.com/en-us/)
+  - Microsoft IIS enabled on your computer.
 
 ### Configure the sample ###
 
@@ -92,7 +93,7 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
 
 	![](http://i.imgur.com/TzXIlut.png)
 
-  5. Copy just the identifier value and return to the sample solution. In Solution Explorer expand the Utils folder and open AADAppSettings.cs.
+  5. Copy just the identifier value and return to the sample solution. In Solution Explorer expand the Utils folder and open SettingsHelper.cs.
   6. Add your tenant ID to the _authority field. It should look similar to this:
 	 `private static string _authority = "https://login.windows.net/g80f86bc-4df0-8wxb-cf96-673d5bca01ad";`
   7. You are now ready to build the project.
@@ -126,7 +127,7 @@ Run the solution and sign in with your organizational account to Office 365.
    - MailItem.cs
 
 **Utils Folder** 
-   - AADAppSettings.cs
+   - SettingsHelper.cs
    - NaiveSessionCache.cs - This is a sample token cache and should not be used in a production environment. We suggest that you store and interact with tokens in accordance with the security policy of your organization. 
 
 **Views**
@@ -153,6 +154,8 @@ Run the solution and sign in with your organizational account to Office 365.
 ## Troubleshooting ##
 
 If you see any errors while installing packages, for example, *Unable to find "Microsoft.Azure.ActiveDirectory.GraphClient" version="1.0.21"*, make sure the local path where you placed the solution is not too long/deep. Moving the solution closer to the root of your drive resolves this issue. We'll also work on shortening the folder names in a future update.  
+
+You will get the following error if IIS is not enabled: "Specified argument was out of the range of valid values.Parameter name: site"
 
 ## Copyright ##
 

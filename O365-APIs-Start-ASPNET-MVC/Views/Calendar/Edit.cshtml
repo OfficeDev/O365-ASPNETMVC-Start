@@ -57,6 +57,7 @@ Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. Se
             <div class="form-group">
                 @Html.LabelFor(model => model.Attendees, new { @class = "control-label col-xs-2" })
                 @Html.EditorFor(model => model.Attendees, new { @class = "form-control col-xs-10" })
+                <span class="uihint">Use a semi-colon to separate email addresses.</span>
                 @Html.ValidationMessageFor(model => model.Attendees)
             </div>
 

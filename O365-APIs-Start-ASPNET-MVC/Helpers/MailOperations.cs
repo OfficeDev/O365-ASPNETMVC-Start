@@ -75,8 +75,8 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
                 {
                     EmailAddress = new EmailAddress
                     {
-                        Address = recipient,
-                        Name = recipient,
+                        Address = recipient.Trim(),
+                        Name = recipient.Trim(),
                     },
                 });
             }

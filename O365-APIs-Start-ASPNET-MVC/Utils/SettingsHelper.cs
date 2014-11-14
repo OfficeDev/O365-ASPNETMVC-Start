@@ -5,7 +5,7 @@ using System.Configuration;
 namespace O365_APIs_Start_ASPNET_MVC.Utils
 {
     //Stores all of the AADSettings required for single sign-on
-    public class AADAppSettings
+    public class SettingsHelper
     {
 
         private static string _clientId = ConfigurationManager.AppSettings["ida:ClientId"] ?? ConfigurationManager.AppSettings["ida:ClientID"];
@@ -13,7 +13,8 @@ namespace O365_APIs_Start_ASPNET_MVC.Utils
         private static string _authorizationUri = ConfigurationManager.AppSettings["ida:AuthorizationUri"];
         private static string _graphResourceId = ConfigurationManager.AppSettings["ida:GraphResourceId"];
 
-        private static string _authority = "https://login.windows.net/REPLACE THIS WITH YOUR TENANT ID";
+        private static string _authority = "https://login.windows.net/<ENTER_YOUR_TENANT_ID_HERE>";
+      
         private static string _discoverySvcResourceId = "https://api.office.com/discovery/";
         private static string _discoverySvcEndpointUri = "https://api.office.com/discovery/v1.0/me/";
 

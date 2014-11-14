@@ -113,7 +113,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
             {
                 attendees[i] = new Attendee();
                 attendees[i].Type = AttendeeType.Required;
-                attendees[i].EmailAddress = new EmailAddress() { Address = splitAttendeeString[i] };
+                attendees[i].EmailAddress = new EmailAddress() { Address = splitAttendeeString[i].Trim() };
             }
 
 
@@ -182,7 +182,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
             for (int i = 0; i < splitAttendeeString.Length; i++)
             {
                 Attendee newAttendee = new Attendee();
-                newAttendee.EmailAddress = new EmailAddress() { Address = splitAttendeeString[i] };
+                newAttendee.EmailAddress = new EmailAddress() { Address = splitAttendeeString[i].Trim() };
                 newAttendee.Type = AttendeeType.Required;
                 eventToUpdate.Attendees.Add(newAttendee);
             }

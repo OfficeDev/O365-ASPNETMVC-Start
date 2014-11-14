@@ -28,7 +28,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
         {
             // Remove all cache entries for this user and send an OpenID Connect sign-out request.
             string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
-            AuthenticationContext authContext = new AuthenticationContext(AADAppSettings.Authority, new NaiveSessionCache(userObjectID));
+            AuthenticationContext authContext = new AuthenticationContext(SettingsHelper.Authority, new NaiveSessionCache(userObjectID));
             authContext.TokenCache.Clear();
 
             HttpContext.GetOwinContext().Authentication.SignOut(

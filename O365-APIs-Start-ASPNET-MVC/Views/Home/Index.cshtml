@@ -13,29 +13,38 @@ Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. Se
         in your app.
     </p>
     <br />
-    <br />
-    <p>To run this sample you'll need to perform the following steps detailed in the sample readme:</p>
+    <p>To get started:</p>
     <br />
     <ol>
-        <li><p>Have the O365 API Tools installed</p></li>
-        <li><p>Register and configure the app to consume Office 365 services</p></li>
-        <li><p>Get your O365 tenant ID from Microsoft Azure</p></li>
+        <li><p>Select Sign in from the upper right corner of this page to sign in to your Office 365 tenant.</p></li>
+        <li><p>Select the buttons below to see this app in action.</p></li>
     </ol>
             
     <br />
-    <br />
     <p>The readme file is in the solution (README.MD), and you can also view it online at <strong><a href="http://aka.ms/o365-apis-start-aspnet">Office 365 Starter Project Readme. </a></strong></p>
-    <br />
     <br />
 
     <div class="mainButtons">
-        <button id="calendarButton" type="button" class="btn btn-lg btn-primary" onclick="location.href='@Url.Action("Index", "Calendar")'">Calendar</button>
+        <button id="calendarButton" type="button" class="btn btn-lg btn-primary has-spinner"  data-spinner="right" onclick="location.href='@Url.Action("Index", "Calendar")'">Calendar</button>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <button id="contactsButton" type="button" class="btn btn-lg btn-primary" onclick="location.href='@Url.Action("Index", "Contact")'">Contacts</button>
+        <button id="contactsButton" type="button" class="btn btn-lg btn-primary has-spinner" data-spinner="right" onclick="location.href='@Url.Action("Index", "Contact")'">Contacts</button>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <button id="emailButton" type="button" class="btn btn-lg btn-primary" onclick="location.href='@Url.Action("Index", "Mail")'">Email</button>
+        <button id="emailButton" type="button" class="btn btn-lg btn-primary has-spinner" data-spinner="right" onclick="location.href='@Url.Action("Index", "Mail")'">Email</button>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var spinnerHTML = "<span class='spinner'><i class='fa fa-spinner fa-spin'></i></span>",
+            spinnerObjects = $(".has-spinner");
+
+
+        spinnerObjects.click(function () {
+            $(this).append("&nbsp;" + spinnerHTML)
+            $(this).toggleClass('active');
+        });
+    });
+
+</script>
 <!--
 *********************************************************
 

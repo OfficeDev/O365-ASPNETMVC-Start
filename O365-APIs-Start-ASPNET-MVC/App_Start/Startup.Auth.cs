@@ -23,8 +23,8 @@ namespace O365_APIs_Start_ASPNET_MVC
             app.UseOpenIdConnectAuthentication(
                 new OpenIdConnectAuthenticationOptions
                 {
-                    ClientId = AADAppSettings.ClientId,
-                    Authority = AADAppSettings.Authority,
+                    ClientId = SettingsHelper.ClientId,
+                    Authority = SettingsHelper.Authority,
 
                     TokenValidationParameters = new System.IdentityModel.Tokens.TokenValidationParameters
                     {
@@ -50,12 +50,12 @@ namespace O365_APIs_Start_ASPNET_MVC
                         {
                             var code = context.Code;
 
-                            ClientCredential credential = new ClientCredential(AADAppSettings.ClientId, AADAppSettings.AppKey);
+                            ClientCredential credential = new ClientCredential(SettingsHelper.ClientId, SettingsHelper.AppKey);
                             String UserObjectId = context.AuthenticationTicket.Identity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-                            AuthenticationContext authContext = new AuthenticationContext(AADAppSettings.Authority, new NaiveSessionCache(UserObjectId));
+                            AuthenticationContext authContext = new AuthenticationContext(SettingsHelper.Authority, new NaiveSessionCache(UserObjectId));
 
-                            AuthenticationResult result = authContext.AcquireTokenByAuthorizationCode(code, new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)), credential, AADAppSettings.AADGraphResourceId);
+                            AuthenticationResult result = authContext.AcquireTokenByAuthorizationCode(code, new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)), credential, SettingsHelper.AADGraphResourceId);
 
                             return Task.FromResult(0);
                         },
