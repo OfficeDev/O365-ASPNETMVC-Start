@@ -14,64 +14,6 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
     // Provides a valid OutlookServices client that contains the bearer token for issuing requests against Calendar, Mail, and Contact resources.
     internal class AuthenticationHelper
     {
-        private static async Task<string> AcquireTokenAsync(AuthenticationContext context, string resoureId, string clientId, UserIdentifier userIdentifier)
-        {
-            string token = null;
-            try
-            {
-                var result = await context.AcquireTokenSilentAsync(resoureId, clientId, userIdentifier);
-                token = result.AccessToken;
-            }
-            catch (AdalException)
-            {
-                // Could not acquire token silently, so let's try more explicitly.
-
-            }
-
-            if (String.IsNullOrEmpty(token))
-            {
-                try
-                {
-
-                    var result = await context.AcquireTokenAsync(resoureId, new ClientCredential(SettingsHelper.ClientId,
-                                                                                                            SettingsHelper.AppKey), new UserAssertion(userIdentifier.Id));
-
-                    token = result.AccessToken;
-                }
-                catch (AdalException)
-                {
-                    // Getting AADSTS50027: Invalid JWT token. Token format not valid. currently.
-                }
-            }
-
-            if (String.IsNullOrEmpty(token))
-            {
-                try
-                {
-                    if (context.TokenCache.ReadItems().Count() > 0)
-                    {
-                        var cacheItem = context.TokenCache.ReadItems().Where(i => i.UniqueId == userIdentifier.Id && i.Resource == resoureId && i.ClientId == clientId).SingleOrDefault();
-                        if (cacheItem != null)
-                        {
-                            var result = await context.AcquireTokenByRefreshTokenAsync(cacheItem.RefreshToken, new ClientCredential(SettingsHelper.ClientId,
-                                                                                                           SettingsHelper.AppKey));
-
-                            token = result.AccessToken;
-                        }
-                    }
-
-
-                }
-                catch (AdalException)
-                {
-
-                }
-            }
-
-            return token;
-
-
-        }
         internal static async Task<OutlookServicesClient> EnsureOutlookServicesClientCreatedAsync(string capabilityName)
         {
 
@@ -83,17 +25,30 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
             try
             {
                 DiscoveryClient discClient = new DiscoveryClient(SettingsHelper.DiscoveryServiceEndpointUri,
-                    async () => await AcquireTokenAsync(authContext, 
-                                                        SettingsHelper.DiscoveryServiceResourceId, 
-                                                        SettingsHelper.ClientId, 
-                                                        new UserIdentifier(signInUserId, UserIdentifierType.UniqueId)));
+                    async () =>
+                    {
+                        var authResult = await authContext.AcquireTokenSilentAsync(SettingsHelper.DiscoveryServiceResourceId, 
+                                                                                   new ClientCredential(SettingsHelper.ClientId, 
+                                                                                                        SettingsHelper.AppKey), 
+                                                                                   new UserIdentifier(userObjectId, 
+                                                                                                      UserIdentifierType.UniqueId));
+
+                        return authResult.AccessToken;
+                    });
 
                 var dcr = await discClient.DiscoverCapabilityAsync(capabilityName);
+
                 return new OutlookServicesClient(dcr.ServiceEndpointUri,
-                    async () => await AcquireTokenAsync(authContext, 
-                                                        dcr.ServiceResourceId, 
-                                                        SettingsHelper.ClientId, 
-                                                        new UserIdentifier(signInUserId, UserIdentifierType.UniqueId)));
+                    async () =>
+                    {
+                        var authResult = await authContext.AcquireTokenSilentAsync(dcr.ServiceResourceId, 
+                                                                                   new ClientCredential(SettingsHelper.ClientId, 
+                                                                                                        SettingsHelper.AppKey), 
+                                                                                   new UserIdentifier(userObjectId, 
+                                                                                                      UserIdentifierType.UniqueId));
+
+                        return authResult.AccessToken;
+                    });
             }
             catch (AdalException exception)
             {
