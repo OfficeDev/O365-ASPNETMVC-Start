@@ -10,12 +10,6 @@ Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. Se
     <br />
     <br />
 
-    <p>
-        @Html.ActionLink("Create New Contact", "Create")
-    </p>
-    <br />
-    <br />
-
     @{bool enableNext = true;}
     @{bool enablePrevious = true;}
     @{int page = ViewBag.Page; }
@@ -26,16 +20,21 @@ Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. Se
 
     @if (ViewBag.O365ServiceOperationFailed == true)
     {
-        <h1>Oops you've reached an error!</h1>
-            <h4>
-            Outlook Services could not perform the operation. If it was a create or an edit operation, one of the most common
+        <h2>Oops you've reached an error!</h2>
+        <h4>
+            Outlook Services could not perform the operation. If it's a create or an edit operation, one of the most common
             reasons for this error is invalid values in one or more of the fields.
-            Please try again and make sure the values you enter are valid.
+            Please try again and make sure the values you enter are valid.<span class="refreshlink"> &nbsp;@Html.ActionLink("Take me back to the list", "Index")</span>
         </h4>
     }
 
     @if (ViewBag.O365ServiceOperationFailed == false)
     {
+    <p>
+        @Html.ActionLink("Create New Contact", "Create")
+    </p>
+    <br />
+    <br />
     <table class="table table-striped">
         <tr>
             <th>
