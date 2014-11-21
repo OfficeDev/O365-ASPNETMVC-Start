@@ -27,10 +27,10 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
                 DiscoveryClient discClient = new DiscoveryClient(SettingsHelper.DiscoveryServiceEndpointUri,
                     async () =>
                     {
-                        var authResult = await authContext.AcquireTokenSilentAsync(SettingsHelper.DiscoveryServiceResourceId, 
-                                                                                   new ClientCredential(SettingsHelper.ClientId, 
-                                                                                                        SettingsHelper.AppKey), 
-                                                                                   new UserIdentifier(userObjectId, 
+                        var authResult = await authContext.AcquireTokenSilentAsync(SettingsHelper.DiscoveryServiceResourceId,
+                                                                                   new ClientCredential(SettingsHelper.ClientId,
+                                                                                                        SettingsHelper.AppKey),
+                                                                                   new UserIdentifier(userObjectId,
                                                                                                       UserIdentifierType.UniqueId));
 
                         return authResult.AccessToken;
@@ -41,10 +41,10 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
                 return new OutlookServicesClient(dcr.ServiceEndpointUri,
                     async () =>
                     {
-                        var authResult = await authContext.AcquireTokenSilentAsync(dcr.ServiceResourceId, 
-                                                                                   new ClientCredential(SettingsHelper.ClientId, 
-                                                                                                        SettingsHelper.AppKey), 
-                                                                                   new UserIdentifier(userObjectId, 
+                        var authResult = await authContext.AcquireTokenSilentAsync(dcr.ServiceResourceId,
+                                                                                   new ClientCredential(SettingsHelper.ClientId,
+                                                                                                        SettingsHelper.AppKey),
+                                                                                   new UserIdentifier(userObjectId,
                                                                                                       UserIdentifierType.UniqueId));
 
                         return authResult.AccessToken;
@@ -56,6 +56,55 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
                 if (exception.ErrorCode == AdalError.FailedToAcquireTokenSilently)
                 {
                     authContext.TokenCache.Clear();
+                    throw exception;
+                }
+                return null;
+            }
+        }
+
+        internal static async Task<SharePointClient> EnsureSharePointClientCreatedAsync(string capabilityName)
+        {
+
+            var signInUserId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userObjectId = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
+
+            // !!! NOTE: DO NOT USE NaiveSessionCache IN PRODUCTION. A MORE PERSISTENT CACHE SUCH AS A DATABASE IS RECOMMENDED FOR PRODUCTION USE !!!!
+            AuthenticationContext authContext = new AuthenticationContext(SettingsHelper.Authority, new NaiveSessionCache(signInUserId));
+
+            try
+            {
+                DiscoveryClient discClient = new DiscoveryClient(SettingsHelper.DiscoveryServiceEndpointUri,
+                    async () =>
+                    {
+                        var authResult = await authContext.AcquireTokenSilentAsync(SettingsHelper.DiscoveryServiceResourceId,
+                                                                                   new ClientCredential(SettingsHelper.ClientId,
+                                                                                                        SettingsHelper.AppKey),
+                                                                                   new UserIdentifier(userObjectId,
+                                                                                                      UserIdentifierType.UniqueId));
+                        return authResult.AccessToken;
+                    });
+
+                var dcr = await discClient.DiscoverCapabilityAsync(capabilityName);
+
+                return new SharePointClient(dcr.ServiceEndpointUri,
+                    async () =>
+                    {
+                        var authResult = await authContext.AcquireTokenSilentAsync(dcr.ServiceResourceId,
+                                                                                   new ClientCredential(SettingsHelper.ClientId,
+                                                                                                        SettingsHelper.AppKey),
+                                                                                   new UserIdentifier(userObjectId,
+                                                                                                      UserIdentifierType.UniqueId));
+
+                        return authResult.AccessToken;
+                    });
+            }
+            catch (AdalException exception)
+            {
+                //Partially handle token acquisition failure here and bubble it up to the controller
+                if (exception.ErrorCode == AdalError.FailedToAcquireTokenSilently)
+                {
+                    authContext.TokenCache.Clear();
+                    throw exception;
                 }
                 return null;
             }

@@ -1,0 +1,43 @@
+﻿@model O365_APIs_Start_ASPNET_MVC.Models.FileObject
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h1>MyFiles</h1>
+<h3>Edit @Model.Name</h3>
+<div>
+    @Html.ActionLink("Take me back to the files and folders list", "Index")
+</div>
+
+
+@using (Html.BeginForm())
+{
+    <hr />
+    <br />
+
+    @Html.ValidationSummary(true)
+
+    <div class="form">
+
+        <form class="form-horizontal">
+
+            <div class="form-group">
+                @Html.TextAreaFor(model => model.FileText, new { @class = "editFilesTextArea" })
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

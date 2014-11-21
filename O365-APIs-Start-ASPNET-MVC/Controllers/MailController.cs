@@ -6,23 +6,36 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using model = O365_APIs_Start_ASPNET_MVC.Models;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.OpenIdConnect;
+using System.Web;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace O365_APIs_Start_ASPNET_MVC.Controllers
 {
     //Read, send, and delete email.
     [Authorize]
+    [HandleError(ExceptionType = typeof(AdalException))]
     public class MailController : Controller
     {
         private MailOperations _mailOperations = new MailOperations();
-        private AuthenticationHelper _authHelper = new AuthenticationHelper();
+        
+        private static bool _O365ServiceOperationFailed = false;  
 
         //Returns the user's email
         //Implements Office 365-side paging
         // GET: /Mail/
         public async Task<ActionResult> Index(int? page)
         {
+            ViewBag.O365ServiceOperationFailed = _O365ServiceOperationFailed;
+
+            if (_O365ServiceOperationFailed)
+            {
+                _O365ServiceOperationFailed = false;
+            }
+
             var pageNumber = page ?? 1;
-            
+
             if (page < 1)
             {
                 pageNumber = 1;
@@ -31,17 +44,40 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
             //Number of events displayed on one page. Edit pageSize if you like
             int pageSize = 10;
 
-            List<model.MailItem> mailMessages = await _mailOperations.GetEmailMessages(pageNumber, pageSize);
+            List<model.MailItem> mailMessages = new List<model.MailItem>();
+            
+            try
+            {
+                mailMessages = await _mailOperations.GetEmailMessages(pageNumber, pageSize);
+            }
+            catch (AdalException e)
+            {
 
+                if (e.ErrorCode == AdalError.FailedToAcquireTokenSilently)
+                {
+
+                    //This exception is thrown when either you have a stale access token, or you attempted to access a resource that you don't have permissions to access.
+                    throw e;
+
+                }
+
+            }
+           
             //Store these in the ViewBag so you can use them in the Index view
             ViewBag.Page = pageNumber;
             ViewBag.NextPage = pageNumber + 1;
             ViewBag.PrevPage = pageNumber - 1;
             ViewBag.LastPage = false;
 
-            if (mailMessages.Count == 0)
+            if ((mailMessages != null) && (mailMessages.Count == 0))
             {
                 ViewBag.LastPage = true;
+            }
+
+            ViewBag.NoItemsinService = false;
+            if ((mailMessages.Count == 0) && (pageNumber == 1))
+            {
+                ViewBag.NoItemsinService = true;
             }
             return View(mailMessages);
         }
@@ -58,7 +94,18 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(FormCollection collection)
         {
-            String newEventID = await _mailOperations.ComposeAndSendMailAsync(collection["Subject"], collection["Body"], collection["Recipients"]);
+            _O365ServiceOperationFailed = false;
+            String newEventID = "";
+
+            try
+            {
+                newEventID = await _mailOperations.ComposeAndSendMailAsync(collection["Subject"], collection["Body"], collection["Recipients"]);
+            }
+            catch (Exception)
+            {
+                _O365ServiceOperationFailed = true;
+            }
+            
             return RedirectToAction("Index", new { newid = newEventID });
         }
 
@@ -74,7 +121,16 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Delete(string id, FormCollection collection)
         {
-            IMessage deletedMail = await _mailOperations.DeleteMailItemAsync(id);
+            _O365ServiceOperationFailed = false;
+            
+            try
+            {
+                IMessage deletedMail = await _mailOperations.DeleteMailItemAsync(id);
+            }
+            catch (Exception)
+            {
+                _O365ServiceOperationFailed = true;
+            }
             return RedirectToAction("Index");
         }
     }

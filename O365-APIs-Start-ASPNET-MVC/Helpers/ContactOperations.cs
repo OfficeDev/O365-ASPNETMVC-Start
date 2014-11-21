@@ -1,5 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Office365.OutlookServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -50,7 +52,13 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
 
                 return returnResults;
             }
-            catch { return null; }
+            catch (Exception ex)
+            {
+                if (ex is AdalException)
+                    throw ex;
+                else
+                    return null;
+            }
         }
 
         /// <summary>

@@ -1,0 +1,39 @@
+﻿@model O365_APIs_Start_ASPNET_MVC.Models.FileObject
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+@{bool isFolder = (Model.DisplayName == "Folder") ? true : false;}
+
+<h1>MyFiles</h1>
+<h3>Are you sure you want to delete this @Model.DisplayName.ToLower()?</h3>
+@if (isFolder)
+{
+    <p>Selecting a folder will erase all files and subdirectories within that folder.</p>
+}
+
+<div>
+    @Html.ActionLink("No, take me back to the files and folders list", "Index")
+</div>
+
+<div>
+    <hr />
+    <p><b>@Model.DisplayName name: </b>@Html.DisplayFor(model => model.Name)</p>
+
+    @using (Html.BeginForm())
+    {
+        <br />
+
+        @Html.ValidationSummary(true)
+        <div class="form">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-offset-2 col-xs-10">
+                        <input type="submit" value="Delete" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+</div>

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<O365_APIs_Start_ASPNET_MVC.Models.FileObject>
+
+  @{
+      ViewBag.Title = "Index";
+  }
+
+    <h1>My Files<span class="refreshlink"> &nbsp;@Html.ActionLink("Refresh", "Index")</span></h1>
+    <br />
+    <br />
+    <p>
+        @Html.ActionLink("Create New Text File", "Create")
+    </p>
+    <br />
+    <br />
+
+@if(ViewBag.O365ServiceOperationFailed == true)
+    {
+    <h1>Oops you've reached an error!</h1>
+    <h4>
+        O365 services could not perform the event. If it's a create or an edit operation, one of the most common
+        reasons for this error is invalid values in one or more of the fields.
+        Please try again and make sure the values you enter are valid.
+    </h4>
+    }
+
+@if (ViewBag.O365ServiceOperationFailed == false)
+{
+
+<table class="table table-striped">
+    <tr>
+        <th>
+
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Item Type
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if ((Request.QueryString["newid"]) == item.ID)
+            {
+                <td class="highlighter">New! </td>
+            }
+            else
+            {
+                if ((Request.QueryString["changedid"]) == item.ID)
+                {
+                    <td class="highlighter">Updated! </td>
+                }
+                else
+                {
+                    <td></td>
+                }
+
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayName)
+            </td>
+
+            @if (item.Name.EndsWith(".txt") || item.Name.EndsWith(".xml"))
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) | @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            }
+        </tr>
+    }
+
+</table>
+}
+
+<br />
+<br />
+
+

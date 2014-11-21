@@ -12,8 +12,9 @@ namespace O365_APIs_Start_ASPNET_MVC.Utils
         private static string _appKey = ConfigurationManager.AppSettings["ida:AppKey"] ?? ConfigurationManager.AppSettings["ida:Password"];
         private static string _authorizationUri = ConfigurationManager.AppSettings["ida:AuthorizationUri"];
         private static string _graphResourceId = ConfigurationManager.AppSettings["ida:GraphResourceId"];
+        private static string _tenantId = ConfigurationManager.AppSettings["ida:TenantID"];
 
-        private static string _authority = "https://login.windows.net/<ENTER_YOUR_TENANT_ID_HERE>";
+        private static string _authority = "https://login.windows.net/" + _tenantId;
       
         private static string _discoverySvcResourceId = "https://api.office.com/discovery/";
         private static string _discoverySvcEndpointUri = "https://api.office.com/discovery/v1.0/me/";

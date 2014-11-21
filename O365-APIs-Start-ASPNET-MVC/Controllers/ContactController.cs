@@ -6,33 +6,63 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using model = O365_APIs_Start_ASPNET_MVC.Models;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.OpenIdConnect;
+using System.Web;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace O365_APIs_Start_ASPNET_MVC.Controllers
 {
     //Read, , create, edit, and delete contacts. 
 
     [Authorize]
+    [HandleError(ExceptionType = typeof(AdalException))]
     public class ContactController : Controller
     {
         private ContactOperations _contactOperations = new ContactOperations();
-        private AuthenticationHelper _authHelper = new AuthenticationHelper();
+       
+        private static bool _O365ServiceOperationFailed = false;  
 
         //Returns the user's contacts
         //Implements Office 365-side paging
         // GET: /Contact/
         public async Task<ActionResult> Index(int? page)
         {
+            ViewBag.O365ServiceOperationFailed = _O365ServiceOperationFailed;
+
+            if (_O365ServiceOperationFailed)
+            {
+                _O365ServiceOperationFailed = false;
+            }
+
             var pageNumber = page ?? 1;
+
             if (page < 1)
             {
-
                 pageNumber = 1;
-
             }
+
             //Number of events displayed on one page. Edit pageSize if you like
             int pageSize = 10;
 
-            List<model.ContactItem> contacts = await _contactOperations.GetContactsPageAsync(pageNumber, pageSize);
+            List<model.ContactItem> contacts = new List<model.ContactItem>();
+
+            try
+            {
+                contacts = await _contactOperations.GetContactsPageAsync(pageNumber, pageSize);
+            }
+            catch (AdalException e)
+            {
+
+                if (e.ErrorCode == AdalError.FailedToAcquireTokenSilently)
+                {
+
+                    //This exception is thrown when either you have a stale access token, or you attempted to access a resource that you don't have permissions to access.
+                    throw e;
+
+                }
+
+            }
 
             //Store these in the ViewBag so you can use them in the Index view
             ViewBag.Page = pageNumber;
@@ -43,6 +73,12 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
             if ((contacts != null) && (contacts.Count == 0))
             {
                 ViewBag.LastPage = true;
+            }
+
+            ViewBag.NoItemsinService = false;
+            if ((contacts.Count == 0) && (pageNumber == 1))
+            {
+                ViewBag.NoItemsinService = true;
             }
             return View(contacts);
         }
@@ -58,13 +94,25 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(FormCollection collection)
         {
-            String newEventID = await _contactOperations.AddContactItemAsync(collection["FileAs"], 
-                                                                             collection["GivenName"], 
-                                                                             collection["Surname"], 
-                                                                             collection["JobTitle"], 
-                                                                             collection["Email"], 
-                                                                             collection["MobilePhone"], 
-                                                                             collection["BusinessPhone"]);
+            _O365ServiceOperationFailed = false;
+            String newEventID = "";
+
+            try
+            {
+
+                newEventID = await _contactOperations.AddContactItemAsync(collection["FileAs"],
+                                                                                collection["GivenName"],
+                                                                                collection["Surname"],
+                                                                                collection["JobTitle"],
+                                                                                collection["Email"],
+                                                                                collection["MobilePhone"],
+                                                                                collection["BusinessPhone"]);
+            }
+            catch (Exception)
+            {
+                _O365ServiceOperationFailed = true;
+            }
+            
             return RedirectToAction("Index", new { newid = newEventID });
         }
 
@@ -81,14 +129,25 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(string id, int page, FormCollection collection)
         {
-            IContact updatedContact = await _contactOperations.UpdateContactItemAsync(id, 
-                                                                                      collection["FileAs"], 
-                                                                                      collection["GivenName"], 
-                                                                                      collection["Surname"], 
-                                                                                      collection["JobTitle"], 
-                                                                                      collection["Email"], 
-                                                                                      collection["MobilePhone"], 
-                                                                                      collection["BusinessPhone"]);
+            _O365ServiceOperationFailed = false;
+
+            try
+            {
+                IContact updatedContact = await _contactOperations.UpdateContactItemAsync(id,
+                                                                                                      collection["FileAs"],
+                                                                                                      collection["GivenName"],
+                                                                                                      collection["Surname"],
+                                                                                                      collection["JobTitle"],
+                                                                                                      collection["Email"],
+                                                                                                      collection["MobilePhone"],
+                                                                                                      collection["BusinessPhone"]);
+            }
+
+            catch (Exception)
+            {
+                _O365ServiceOperationFailed = true;
+            }
+
             return RedirectToAction("Index", new { page, changedid = id });
         }
 
@@ -105,7 +164,16 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Delete(string id, FormCollection collection)
         {
-            bool success = await _contactOperations.DeleteContactAsync(id);
+            _O365ServiceOperationFailed = false;
+
+            try
+            {
+                bool success = await _contactOperations.DeleteContactAsync(id);
+            }
+            catch (Exception)
+            {
+                _O365ServiceOperationFailed = true;
+            }
             return RedirectToAction("Index");
         }
     }

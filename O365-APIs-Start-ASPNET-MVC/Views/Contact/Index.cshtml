@@ -22,7 +22,20 @@ Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. Se
     @{int nextPage = ViewBag.NextPage; }
     @{int prevPage = ViewBag.PrevPage; }
     @{bool lastPage = ViewBag.LastPage; }
+    @{bool noItemsinService = ViewBag.NoItemsinService; }
 
+    @if (ViewBag.O365ServiceOperationFailed == true)
+    {
+        <h1>Oops you've reached an error!</h1>
+            <h4>
+            Outlook Services could not perform the operation. If it was a create or an edit operation, one of the most common
+            reasons for this error is invalid values in one or more of the fields.
+            Please try again and make sure the values you enter are valid.
+        </h4>
+    }
+
+    @if (ViewBag.O365ServiceOperationFailed == false)
+    {
     <table class="table table-striped">
         <tr>
             <th>
@@ -110,26 +123,33 @@ Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. Se
         }
     </table>
 
-    @if (lastPage == true)
+    if (noItemsinService == true)
+    {
+        enableNext = false;
+        enablePrevious = false;
+        <h5>You've no contacts defined in the Outlook service.</h5>
+    }
+    if (lastPage == true)
     {
         enableNext = false;
     }
 
-    @if (enablePrevious == true)
+   if (enablePrevious == true)
     {
         page = prevPage;
         @Html.ActionLink("Previous", "Index", new { page })
 
     }
-    @if ((enablePrevious == true) && (enableNext == true))
+    if ((enablePrevious == true) && (enableNext == true))
     {
         <span> &nbsp;| &nbsp; </span>
     }
 
-    @if (enableNext == true)
+    if (enableNext == true)
     {
         page = nextPage;
         @Html.ActionLink("Next", "Index", new { page })
+    }
     }
 
     <br />

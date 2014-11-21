@@ -11,7 +11,7 @@
 
 ## Overview ##
 
-This sample uses the [Office 365 APIs client libraries](http://msdn.microsoft.com/en-us/office/office365/howto/platform-development-overview) to demonstrate basic operations against the Calendar, Contacts, and Mail service endpoints in Office 365 from a single-tenant ASP.NET MVC 5 application.  
+This sample uses the [Office 365 APIs client libraries](http://msdn.microsoft.com/en-us/office/office365/howto/platform-development-overview) to demonstrate basic operations against the Calendar, Contacts, Mail, and Files (OneDrive for Business) service endpoints in Office 365 from a single-tenant ASP.NET MVC 5 application.  
 
 Below are the operations that you can perform with this sample:
 
@@ -20,18 +20,25 @@ Below are the operations that you can perform with this sample:
   - Add events
   - Refresh the calendar
   - Update events
-  - Remove events
+  - Delete events
 
 **Contacts**
   - Add contacts
   - Refresh the contacts list
   - Update contacts
-  - Remove contacts
+  - Delete contacts
   
 **Mail**
   - Read email messages
   - Create and send a new email
 
+**Files (OneDrive for Business)**
+  - Read files and folders.
+  - Create text file.
+  - Delete files and folders.
+  - Read text file contents.
+  - Update text file contents.
+  
 **Users and Groups**
   - Sign in/out
 
@@ -53,6 +60,7 @@ Follow these steps to configure the sample.
    2. Register and configure the app to consume Office 365 services (detailed below).
    3. Get your Office 365 tenant ID from Microsoft Azure (detailed below).
 
+   Note: It is important to ensure the Office 365 API Tools are updated to the most recent version. Failure to do so may cause issues with running the sample. Again the most recent tools are located here: [Microsoft Office 365 API Tools version 1.3.41104.1](https://visualstudiogallery.msdn.microsoft.com/a15b85e6-69a7-4fdf-adda-a38066bb5155). 
 ### Register app to consume Office 365 APIs ###
 
 You can do this via the Office 365 API Tools for Visual Studio (which automates the registration process). Be sure to download and install the [Office 365 API tools](https://visualstudiogallery.msdn.microsoft.com/a15b85e6-69a7-4fdf-adda-a38066bb5155) from the Visual Studio Gallery.
@@ -63,9 +71,10 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
    3. On the sign-in dialog box, enter the user name and password for your Office 365 tenant. We recommend that you use your Office 365 Developer Site. Often, this user name will follow the pattern <your-name>@<tenant-name>.onmicrosoft.com. If you do not have a developer site, you can get a free Developer Site as part of your MSDN Benefits or sign up for a free trial. Be aware that the user must be a Tenant Admin user—but for tenants created as part of an Office 365 Developer Site, this is likely to be the case already. Also developer accounts are usually limited to one sign-in.
    4. After you're signed in, you will see a list of all the services. Initially, no permissions will be selected, as the app is not registered to consume any services yet. 
    5. To register for the services used in this sample, choose the following permissions, and select the Permissions link to set the following permissions:
-	- (Calendar) – Have full access to users’ calendar and Read users' calendars
-	- (Contacts) – Have full access to users’ contacts and Read users' contacts
-	- (Mail) - Send mail as a user, Read and write access to users' mail, and Read users' mail
+	- (Calendar) – Have full access to users’ calendar
+	- (Contacts) – Have full access to users’ contacts
+	- (Mail) - Send mail as a user and Read and write access to users' mail
+	- (Files) - Edit or delete users' files.
 	- (Users and Groups) – Enable sign-on and read users’ profiles
    6. Choose the App Properties link in the Services Manager window. Make this app available to a Single Organization. 
    7. After clicking OK in the Services Manager window, assemblies for connecting to Office 365 REST APIs will be added to your project.
@@ -93,9 +102,9 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
 
 	![](http://i.imgur.com/TzXIlut.png)
 
-  5. Copy just the identifier value and return to the sample solution. In Solution Explorer expand the Utils folder and open SettingsHelper.cs.
-  6. Add your tenant ID to the _authority field. It should look similar to this:
-	 `private static string _authority = "https://login.windows.net/g80f86bc-4df0-8wxb-cf96-673d5bca01ad";`
+  5. Copy just the identifier value and return to the sample solution.
+  6. Add your tenant ID to the ida:TenantID key in the web.config. It should look similar to this:
+	 `<add key="ida:TenantID" value="d10f81ac-2de0-4eaf-af91-393d1bdaf17d"/>`
   7. You are now ready to build the project.
   
 Note: If you are deploying to a production tenant, you will need to ask your tenant admin for the tenant identifier.
@@ -112,17 +121,21 @@ Run the solution and sign in with your organizational account to Office 365.
    - AccountController.cs
    - CalendarController.cs
    - ContactController.cs
+   - FileController.cs
+   - HomeController.cs
    - MailContoller.cs
 
 **Helper Classes**
+   - AuthenticationHelper.cs
    - CalendarOperations.cs
    - ContactOperations.cs
-   - MailOperations
-   - AuthenticationHelper.cs
+   - FileOperations.cs
+   - MailOperations.cs
  
 **Models**
    - CalendarEvent.cs
    - ContactItem.cs
+   - FileItem.cs
    - IdentityModels.cs
    - MailItem.cs
 
@@ -139,6 +152,11 @@ Run the solution and sign in with your organizational account to Office 365.
    - Contact/Delete.cshtml
    - Contact/Edit.cshtml
    - Contact/Index.cshtml
+   - File/Create.cshtml
+   - File/Delete.cshtml
+   - File/Edit.cshtml
+   - File/Index.cshtml
+   - Home/Index.cshtml
    - Mail/Create.cshtml
    - Mail/Delete.cshtml
    - Mail/Index.cshtml
@@ -149,14 +167,18 @@ Run the solution and sign in with your organizational account to Office 365.
    - RouteConfig.cs
    - web.config
    - Startup.cs
+   - Startup.Auth.cs
    - packages.config
 
 ## Troubleshooting ##
 
-If you see any errors while installing packages, for example, *Unable to find "Microsoft.Azure.ActiveDirectory.GraphClient" version="1.0.21"*, make sure the local path where you placed the solution is not too long/deep. Moving the solution closer to the root of your drive resolves this issue. We'll also work on shortening the folder names in a future update.  
+If you see any errors while installing packages, for example, *Unable to find "Microsoft.Azure.ActiveDirectory.GraphClient" version="1.0.21"*, make sure the local path where you placed the solution is not too long/deep. Moving the solution closer to the root of your drive resolves this issue. We'll also work on shortening the folder names in a future update. There is a long file name restriction of about 260 characters in Visual Studio. 
 
-You will get the following error if IIS is not enabled: "Specified argument was out of the range of valid values.Parameter name: site"
+Your browser will not display a web page if you try to sign-in and the application doesn't have the Users and Groups,  **Enable sign-on and read users’ profiles** option selected. 
 
+The **Specified argument was out of the range of valid values.Parameter name: site** will occur if IIS is not enabled. 
+
+An incorrect tenant identifier will return a 404 HTTP status code. 
 ## Copyright ##
 
 Copyright (c) Microsoft. All rights reserved.

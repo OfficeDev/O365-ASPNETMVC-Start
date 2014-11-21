@@ -1,0 +1,42 @@
+﻿@model O365_APIs_Start_ASPNET_MVC.Models.FileObject
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h1>My Files</h1>
+<h3>Create New Text File</h3>
+<div>
+    @Html.ActionLink("Discard this and take me back to the list", "Index")
+</div>
+
+@using (Html.BeginForm())
+{
+    <hr />
+    <br />
+
+    @Html.ValidationSummary(true)
+
+    <div class="form">
+
+        <form class="form-horizontal">
+
+            <div class="form-group">
+                <p><b>Do you want to create a file named demo.txt? If a file named demo.txt already exists, this will delete the file and create a new one.</b></p>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -5,10 +5,41 @@ Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. Se
 @{
     ViewBag.Title = "Home Page";
 }
+
+@if (ViewBag.DidNotAddConnectedServices == true)
+{
+    <h3>Error!</h3>
+    <br />
+    <br />
+    <h5>Looks like you may not have added the connected service to your project. Follow the 
+    instructions in the readme to register and configure the sample to consume Office 365 services. The 
+    readme file is in the solution (README.MD), and you can also view it 
+    online at <strong><a href="http://aka.ms/o365-apis-start-aspnet">Office 365 Starter Project Readme. </a></strong></h5>
+    <br />
+    <br />
+}
+
+@if (ViewBag.TenantIDIsNull == true)
+{
+    <h3>Error!</h3>
+    <br />
+    <br />
+    <h5>
+        Looks like you may not have entered the value of your tenant ID in the web.config file in your project. Follow the
+        instructions in the readme to get this value from the Azure portal and copy it into the web.config file. The
+        readme file is in the solution (README.MD), and you can also view it
+        online at <strong><a href="http://aka.ms/o365-apis-start-aspnet">Office 365 Starter Project Readme. </a></strong>
+    </h5>
+    <br />
+    <br />
+}
+
+@if((ViewBag.DidNotAddConnectedServices == false) && (ViewBag.TenantIDIsNull == false))
+{
 <div class="main">
     <br />
     <p>
-        This sample uses the <strong><a href="http://msdn.microsoft.com/en-us/office/office365/howto/platform-development-overview">Office 365 API</a></strong> client libraries to illustrate basic operations against the Calendar, Contacts, and Mail
+        This sample uses the <strong><a href="http://msdn.microsoft.com/en-us/office/office365/howto/platform-development-overview">Office 365 API</a></strong> client libraries to illustrate basic operations against the Calendar, Contacts, Mail, and Files (OneDrive for Business)
         service endpoints in Office 365. It also demonstrates how to enable single sign-on and authenticate against multiple Office 365 services
         in your app.
     </p>
@@ -21,7 +52,11 @@ Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. Se
     </ol>
             
     <br />
+    <br />
     <p>The readme file is in the solution (README.MD), and you can also view it online at <strong><a href="http://aka.ms/o365-apis-start-aspnet">Office 365 Starter Project Readme. </a></strong></p>
+
+    <p><strong>It is critical that all the Office 365 service permissions are configured properly in this sample as detailed in the sample readme. Failure to do so may cause authentication and functionality issues within this app.</strong></p>
+    <br />
     <br />
 
     <div class="mainButtons">
@@ -30,8 +65,12 @@ Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. Se
         <button id="contactsButton" type="button" class="btn btn-lg btn-primary has-spinner" data-spinner="right" onclick="location.href='@Url.Action("Index", "Contact")'">Contacts</button>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <button id="emailButton" type="button" class="btn btn-lg btn-primary has-spinner" data-spinner="right" onclick="location.href='@Url.Action("Index", "Mail")'">Email</button>
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <button id="myFilesButton" type="button" class="btn btn-lg btn-primary has-spinner" data-spinner="right" onclick="location.href='@Url.Action("Index", "File")'">My Files</button>
     </div>
 </div>
+}
+
 <script type="text/javascript">
     $(document).ready(function () {
         var spinnerHTML = "<span class='spinner'><i class='fa fa-spinner fa-spin'></i></span>",
@@ -45,6 +84,8 @@ Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. Se
     });
 
 </script>
+
+
 <!--
 *********************************************************
 

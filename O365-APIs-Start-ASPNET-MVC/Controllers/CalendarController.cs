@@ -6,41 +6,71 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using model = O365_APIs_Start_ASPNET_MVC.Models;
-
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.OpenIdConnect;
+using System.Web;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace O365_APIs_Start_ASPNET_MVC.Controllers
 {
     //Read calendar and create, edit, and delete events. 
 
     [Authorize]
+    [HandleError(ExceptionType = typeof(AdalException))]
     public class CalendarController : Controller
     {
         private CalendarOperations _calenderOperations = new CalendarOperations();
-        private AuthenticationHelper _authHelper = new AuthenticationHelper();
-        
+               
         //Constants used to get the events in the time range; Edit if you like
         private const int NumberOfHoursBefore = 240;
         private const int NumberOfHoursAfter = 240;
+
+        private static bool _O365ServiceOperationFailed = false;   
 
         //Returns the calendar events that fall in the specified duration
         //Implements Office 365-side paging
         // GET: /Calendar/
         public async Task<ActionResult> Index(int? page)
         {
+            ViewBag.O365ServiceOperationFailed = _O365ServiceOperationFailed;
+
+            if (_O365ServiceOperationFailed)
+            {
+                _O365ServiceOperationFailed = false;
+            }
+
             var pageNumber = page ?? 1;
+
             if (page < 1)
             {
-
                 pageNumber = 1;
             }
 
             //Number of events displayed on one page. Edit pageSize if you like
             int pageSize = 10;
 
-            List<model.CalendarEvent> events = await _calenderOperations.GetTodaysCalendar(NumberOfHoursBefore, 
-                                                                                           NumberOfHoursAfter, 
-                                                                                           pageNumber, 
-                                                                                           pageSize);
+            List<model.CalendarEvent> events = new List<model.CalendarEvent>();
+
+            try
+            {
+                events = await _calenderOperations.GetTodaysCalendar(NumberOfHoursBefore, 
+                                                                     NumberOfHoursAfter,
+                                                                     pageNumber,
+                                                                     pageSize);
+            }
+
+            catch (AdalException e)
+            {
+
+                if (e.ErrorCode == AdalError.FailedToAcquireTokenSilently)
+                {
+
+                    //This exception is thrown when either you have a stale access token, or you attempted to access a resource that you don't have permissions to access.
+                    throw e;
+
+                }
+
+            }
 
             //Store these in the ViewBag so you can use them in the Index view
             ViewBag.Page = pageNumber;
@@ -48,9 +78,15 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
             ViewBag.PrevPage = pageNumber - 1;
             ViewBag.LastPage = false;
 
-            if (events.Count == 0)
+            if ((events != null) && (events.Count == 0))
             {
                 ViewBag.LastPage = true;
+            }
+
+            ViewBag.NoItemsinService = false;
+            if ((events.Count == 0) && (pageNumber ==1))
+            {
+                ViewBag.NoItemsinService = true;
             }
             return View(events);
         }
@@ -66,12 +102,26 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Create(FormCollection collection)
         {
-            String newEventID = await _calenderOperations.AddCalendarEventAsync(collection["Location"], 
+            _O365ServiceOperationFailed = false;
+            String newEventID ="";
+
+            try
+            {
+               
+
+                newEventID = await _calenderOperations.AddCalendarEventAsync(collection["Location"], 
                                                                                 collection["Body"], 
                                                                                 collection["Attendees"], 
                                                                                 collection["Subject"], 
                                                                                 DateTimeOffset.Parse(collection["StartDate"]), 
                                                                                 DateTimeOffset.Parse(collection["EndDate"]));
+            }
+
+            catch(Exception)
+            {
+                _O365ServiceOperationFailed = true;
+            }
+            
             return RedirectToAction("Index", new { newid = newEventID });
         }
 
@@ -88,13 +138,23 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit(string id, int page, FormCollection collection)
         {
-            IEvent updatedEvent = await _calenderOperations.UpdateCalendarEventAsync(id, 
-                                                                                     collection["Location"], 
-                                                                                     collection["Body"], 
-                                                                                     collection["Attendees"], 
-                                                                                     collection["Subject"], 
-                                                                                     DateTimeOffset.Parse(collection["StartDate"]), 
-                                                                                     DateTimeOffset.Parse(collection["EndDate"]));
+            _O365ServiceOperationFailed = false;
+
+            try
+            {
+                
+                IEvent updatedEvent = await _calenderOperations.UpdateCalendarEventAsync(id, 
+                                                                                                     collection["Location"], 
+                                                                                                     collection["Body"], 
+                                                                                                     collection["Attendees"], 
+                                                                                                     collection["Subject"], 
+                                                                                                     DateTimeOffset.Parse(collection["StartDate"]), 
+                                                                                                     DateTimeOffset.Parse(collection["EndDate"]));
+            }
+            catch (Exception)
+            {
+                _O365ServiceOperationFailed = true;
+            }
             return RedirectToAction("Index", new { page, changedid = id });
         }
 
@@ -111,7 +171,15 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
         [HttpPost]
         public async Task<ActionResult> Delete(string id, FormCollection collection)
         {
-            IEvent deletedEvent = await _calenderOperations.DeleteCalendarEventAsync(id);
+            _O365ServiceOperationFailed = false;
+            try
+            {
+                IEvent deletedEvent = await _calenderOperations.DeleteCalendarEventAsync(id);
+            }
+            catch (Exception)
+            {
+                _O365ServiceOperationFailed = true;
+            }
             return RedirectToAction("Index");
         }
     }

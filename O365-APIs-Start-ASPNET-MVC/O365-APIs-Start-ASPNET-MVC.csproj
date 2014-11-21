@@ -236,6 +236,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Global.asax.cs">
@@ -244,9 +245,11 @@
     <Compile Include="Helpers\AuthenticationHelper.cs" />
     <Compile Include="Helpers\CalendarOperations.cs" />
     <Compile Include="Helpers\ContactOperations.cs" />
+    <Compile Include="Helpers\FileOperations.cs" />
     <Compile Include="Helpers\MailOperations.cs" />
     <Compile Include="Models\CalendarEvent.cs" />
     <Compile Include="Models\ContactItem.cs" />
+    <Compile Include="Models\FileItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MailItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -265,8 +268,10 @@
     <Content Include="Images\Logo.scale-100.png" />
     <Content Include="Images\SmallLogo.scale-100.png" />
     <Content Include="Images\StoreLogo.scale-100.png" />
+    <Content Include="LICENSE.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="README.MD" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -308,6 +313,10 @@
     <Content Include="Views\Mail\Create.cshtml" />
     <Content Include="Views\Mail\Delete.cshtml" />
     <Content Include="Views\Mail\Index.cshtml" />
+    <Content Include="Views\File\Index.cshtml" />
+    <Content Include="Views\File\Create.cshtml" />
+    <Content Include="Views\File\Edit.cshtml" />
+    <Content Include="Views\File\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
