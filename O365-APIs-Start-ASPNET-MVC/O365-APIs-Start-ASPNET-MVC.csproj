@@ -268,10 +268,10 @@
     <Content Include="Images\Logo.scale-100.png" />
     <Content Include="Images\SmallLogo.scale-100.png" />
     <Content Include="Images\StoreLogo.scale-100.png" />
-    <Content Include="LICENSE.txt" />
+    <Content Include="..\LICENSE.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="README.MD" />
+    <Content Include="..\README.MD" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
