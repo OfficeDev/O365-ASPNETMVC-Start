@@ -27,13 +27,24 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
         public void SignOut()
         {
             // Remove all cache entries for this user and send an OpenID Connect sign-out request.
-            string userObjectID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
-            AuthenticationContext authContext = new AuthenticationContext(SettingsHelper.Authority, new NaiveSessionCache(userObjectID));
-            authContext.TokenCache.Clear();
-
+            string callbackUrl = Url.Action("SignOutCallback", "Account", routeValues: null, protocol: Request.Url.Scheme);
+            
             HttpContext.GetOwinContext().Authentication.SignOut(
+                new AuthenticationProperties { RedirectUri = callbackUrl },
                 OpenIdConnectAuthenticationDefaults.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType);
         }
+
+        public ActionResult SignOutCallback()
+        {
+            if (Request.IsAuthenticated)
+            {
+                // Redirect to home page if the user is authenticated.
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
         public void RefreshSession()
         {
             string strRedirectController = Request.QueryString["redirect"];

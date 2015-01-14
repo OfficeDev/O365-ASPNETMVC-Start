@@ -1,19 +1,27 @@
-﻿// Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
-using Microsoft.AspNet.Identity.EntityFramework;
+// Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 
 namespace O365_APIs_Start_ASPNET_MVC.Models
 {
-    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUser : IdentityUser
-    {
-    }
-
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
         }
+
+        public DbSet<UserTokenCache> UserTokenCacheList { get; set; }
+    }
+
+    public class UserTokenCache
+    {
+        [Key]
+        public int UserTokenCacheId { get; set; }
+        public string webUserUniqueId { get; set; }
+        public byte[] cacheBits { get; set; }
+        public DateTime LastWrite { get; set; }
     }
 }
 //*********************************************************  

@@ -108,7 +108,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
             }
 
             // ODataErrorException can be thrown when you try to create a file that already exists.
-            catch (Microsoft.Data.OData.ODataErrorException ex)
+            catch (Microsoft.Data.OData.ODataErrorException)
             {
                 //isSuccess = false;
             }

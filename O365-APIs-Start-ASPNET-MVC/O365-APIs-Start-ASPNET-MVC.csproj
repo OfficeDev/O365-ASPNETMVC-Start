@@ -247,17 +247,21 @@
     <Compile Include="Helpers\ContactOperations.cs" />
     <Compile Include="Helpers\FileOperations.cs" />
     <Compile Include="Helpers\MailOperations.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ADALTokenCache.cs" />
     <Compile Include="Models\CalendarEvent.cs" />
     <Compile Include="Models\ContactItem.cs" />
     <Compile Include="Models\FileItem.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MailItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\SettingsHelper.cs" />
-    <Compile Include="Utils\NaiveSessionCache.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\ADALTokenCacheDb.mdf" />
+    <Content Include="App_Data\ADALTokenCacheDb_log.ldf">
+      <DependentUpon>ADALTokenCacheDb.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\jquery.datetimepicker.css" />

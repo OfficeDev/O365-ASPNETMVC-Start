@@ -4,6 +4,7 @@ using Microsoft.Office365.Discovery;
 using Microsoft.Office365.OutlookServices;
 using Microsoft.Office365.SharePoint.CoreServices;
 using O365_APIs_Start_ASPNET_MVC.Utils;
+using O365_APIs_Start_ASPNET_MVC.Models;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
             var signInUserId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
             var userObjectId = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
 
-            AuthenticationContext authContext = new AuthenticationContext(SettingsHelper.Authority, new NaiveSessionCache(signInUserId));
+            AuthenticationContext authContext = new AuthenticationContext(SettingsHelper.Authority, new ADALTokenCache(signInUserId));
 
             try
             {
@@ -68,8 +69,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
             var signInUserId = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
             var userObjectId = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
 
-            // !!! NOTE: DO NOT USE NaiveSessionCache IN PRODUCTION. A MORE PERSISTENT CACHE SUCH AS A DATABASE IS RECOMMENDED FOR PRODUCTION USE !!!!
-            AuthenticationContext authContext = new AuthenticationContext(SettingsHelper.Authority, new NaiveSessionCache(signInUserId));
+            AuthenticationContext authContext = new AuthenticationContext(SettingsHelper.Authority, new ADALTokenCache(signInUserId));
 
             try
             {

@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
+using O365_APIs_Start_ASPNET_MVC.Models;
 using O365_APIs_Start_ASPNET_MVC.Utils;
 using Owin;
 using System;
@@ -26,20 +27,20 @@ namespace O365_APIs_Start_ASPNET_MVC
                     ClientId = SettingsHelper.ClientId,
                     Authority = SettingsHelper.Authority,
 
-                    TokenValidationParameters = new System.IdentityModel.Tokens.TokenValidationParameters
-                    {
-                        // Use the default validation (validating against a single issuer value, in line of business apps (single tenant apps))
-                        //
-                        // NOTE:
-                        // * In a multitenant scenario, you can never validate against a fixed issuer string, as every tenant will send a different one.
-                        // * If you don’t care about validating tenants, as is the case for apps giving access to 1st party resources, you just turn off validation.
-                        // * If you do care about validating tenants, think of the case in which your app sells access to premium content and you want to limit access only to the tenant that paid a fee, 
-                        //       you still need to turn off the default validation but you do need to add logic that compares the incoming issuer to a list of tenants that paid you, 
-                        //       and block access if that’s not the case.
-                        // * Refer to the following sample for a custom validation logic: https://github.com/AzureADSamples/WebApp-WebAPI-MultiTenant-OpenIdConnect-DotNet
+                    //TokenValidationParameters = new System.IdentityModel.Tokens.TokenValidationParameters
+                    //{
+                    //    // Use the default validation (validating against a single issuer value, in line of business apps (single tenant apps))
+                    //    //
+                    //    // NOTE:
+                    //    // * In a multitenant scenario, you can never validate against a fixed issuer string, as every tenant will send a different one.
+                    //    // * If you don’t care about validating tenants, as is the case for apps giving access to 1st party resources, you just turn off validation.
+                    //    // * If you do care about validating tenants, think of the case in which your app sells access to premium content and you want to limit access only to the tenant that paid a fee, 
+                    //    //       you still need to turn off the default validation but you do need to add logic that compares the incoming issuer to a list of tenants that paid you, 
+                    //    //       and block access if that’s not the case.
+                    //    // * Refer to the following sample for a custom validation logic: https://github.com/AzureADSamples/WebApp-WebAPI-MultiTenant-OpenIdConnect-DotNet
 
-                        ValidateIssuer = true
-                    },
+                    //    ValidateIssuer = true
+                    //},
 
                     Notifications = new OpenIdConnectAuthenticationNotifications()
                     {
@@ -53,7 +54,7 @@ namespace O365_APIs_Start_ASPNET_MVC
                             ClientCredential credential = new ClientCredential(SettingsHelper.ClientId, SettingsHelper.AppKey);
                             String UserObjectId = context.AuthenticationTicket.Identity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-                            AuthenticationContext authContext = new AuthenticationContext(SettingsHelper.Authority, new NaiveSessionCache(UserObjectId));
+                            AuthenticationContext authContext = new AuthenticationContext(SettingsHelper.Authority, new ADALTokenCache(UserObjectId));
 
                             AuthenticationResult result = authContext.AcquireTokenByAuthorizationCode(code, new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)), credential, SettingsHelper.AADGraphResourceId);
 
@@ -75,7 +76,7 @@ namespace O365_APIs_Start_ASPNET_MVC
 
                         AuthenticationFailed = (context) =>
                         {
-                            // Suppress the exception
+                            // Suppress the exception if you don't want to see the error
                             context.HandleResponse();
 
                             return Task.FromResult(0);
