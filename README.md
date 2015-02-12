@@ -66,9 +66,9 @@ Follow these steps to configure the sample.
 You can do this via the Office 365 API Tools for Visual Studio (which automates the registration process). Be sure to download and install the [Office 365 API tools](https://visualstudiogallery.msdn.microsoft.com/a15b85e6-69a7-4fdf-adda-a38066bb5155) from the Visual Studio Gallery.
 
    1. Build the project. This will restore the NuGet packages for this solution. 
-   2. In the Solution Explorer window, choose O365-APIs-Start-ASPNET-MVC project -> Add -> Connected Service.
-   2. A Services Manager window will appear. Choose Office 365 and Register your app.
-   3. On the sign-in dialog box, enter the user name and password for your Office 365 tenant. We recommend that you use your Office 365 Developer Site. Often, this user name will follow the pattern <your-name>@<tenant-name>.onmicrosoft.com. If you do not have a developer site, you can get a free Developer Site as part of your MSDN Benefits or sign up for a free trial. Be aware that the user must be a Tenant Admin user—but for tenants created as part of an Office 365 Developer Site, this is likely to be the case already. Also developer accounts are usually limited to one sign-in.
+   2. In the Solution Explorer window, choose **O365-APIs-Start-ASPNET-MVC** project -> **Add** -> **Connected Service**.
+   2. A Services Manager window will appear. Choose **Office 365** -> **Office 365 APIs** and select the **Register your app** link.
+   3. If you haven't signed in before, a sign-in dialog box will appear.  Enter the user name and password for your Office 365 tenant admin. We recommend that you use your Office 365 Developer Site. Often, this user name will follow the pattern @.onmicrosoft.com. If you do not have a developer site, you can get a free Developer Site as part of your MSDN Benefits or sign up for a free trial. Be aware that the user must be a Tenant Admin user—but for tenants created as part of an Office 365 Developer Site, this is likely to be the case already. Also developer accounts are usually limited to one sign-in.
    4. After you're signed in, you will see a list of all the services. Initially, no permissions will be selected, as the app is not registered to consume any services yet. 
    5. To register for the services used in this sample, choose the following permissions, and select the Permissions link to set the following permissions:
 	- (Calendar) – Have full access to users’ calendar
@@ -76,8 +76,8 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
 	- (Mail) - Send mail as a user and Read and write access to users' mail
 	- (Files) - Edit or delete users' files.
 	- (Users and Groups) – Enable sign-on and read users’ profiles
-   6. Choose the App Properties link in the Services Manager window. Make this app available to a Single Organization. 
-   7. After clicking OK in the Services Manager window, assemblies for connecting to Office 365 REST APIs will be added to your project.
+   6. Choose the **App Properties** link in the Services Manager window. Make this app available to a Single Organization. 
+   7. After selecting **OK** in the Services Manager window, assemblies for connecting to Office 365 REST APIs will be added to your project.
    8. Build the solution.
 
 ### Get your Office 365 tenant ID from Microsoft Azure ###
@@ -85,7 +85,7 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
  In order to complete this procedure, you're going to need to log into the Microsoft Azure management portal. To do this you must have an Azure subscription. A free trial is available if you do not currently have one.
  You can sign up here: http://azure.microsoft.com/en-us/pricing/free-trial/. You must also ensure you have already completed the Register app to consume Office 365 APIs procedure.
 
- Note: You will also need to ensure your Azure subscription is bound to your Office 365 tenant. To do this see the Active Directory team's blog post, [Creating and Managing Multiple Windows Azure Active Directories](http://blogs.technet.com/b/ad/archive/2013/11/08/creating-and-managing-multiple-windows-azure-active-directories.aspx). The section **Adding a new directory** will explain how to do this. You can also read [Set up Azure Active Directory access for your Developer Site](http://msdn.microsoft.com/en-us/office/office365/howto/setup-development-environment#bk_CreateAzureSubscription) for more information.
+ **Important**: You will also need to ensure your Azure subscription is bound to your Office 365 tenant. To do this see the Active Directory team's blog post, [Creating and Managing Multiple Windows Azure Active Directories](http://blogs.technet.com/b/ad/archive/2013/11/08/creating-and-managing-multiple-windows-azure-active-directories.aspx). The section **Adding a new directory** will explain how to do this. You can also read [Set up Azure Active Directory access for your Developer Site](http://msdn.microsoft.com/en-us/office/office365/howto/setup-development-environment#bk_CreateAzureSubscription) for more information.
 
  To retrieve your Office 365 tenant ID:
 
@@ -176,7 +176,7 @@ If you see any errors while installing packages, for example, *Unable to find "M
 
 Your browser will not display a web page if you try to sign-in and the application doesn't have the Users and Groups,  **Enable sign-on and read users’ profiles** option selected. 
 
-The **Specified argument was out of the range of valid values.Parameter name: site** will occur if IIS is not enabled. 
+The **Specified argument was out of the range of valid values. Parameter name: site** will occur if IIS is not enabled. 
 
 An incorrect tenant identifier will return a 404 HTTP status code. 
 ## Copyright ##
