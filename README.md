@@ -46,10 +46,11 @@ Below are the operations that you can perform with this sample:
 ## Prerequisites and Configuration ##
 
 This sample requires the following:
+
   - Visual Studio 2013 with Update 3.
-  - [Microsoft Office 365 API Tools version 1.3.41104.1](https://visualstudiogallery.msdn.microsoft.com/a15b85e6-69a7-4fdf-adda-a38066bb5155). 
-  - An [Office 365 developer site](https://portal.office.com/Signup/Signup.aspx?OfferId=6881A1CB-F4EB-4db3-9F18-388898DAF510&DL=DEVELOPERPACK&ali=1).
-  - A subscription to [Microsoft Azure](http://azure.microsoft.com/en-us/)
+  - [Microsoft Office 365 API Tools version 1.3.41104.1](http://aka.ms/k0534n). 
+  - An [Office 365 developer site](http://aka.ms/ro9c62).
+  - A subscription to [Microsoft Azure](http://aka.ms/pp13iv)
   - Microsoft IIS enabled on your computer.
 
 ### Configure the sample ###
@@ -60,10 +61,10 @@ Follow these steps to configure the sample.
    2. Register and configure the app to consume Office 365 services (detailed below).
    3. Get your Office 365 tenant ID from Microsoft Azure (detailed below).
 
-   Note: It is important to ensure the Office 365 API Tools are updated to the most recent version. Failure to do so may cause issues with running the sample. Again the most recent tools are located here: [Microsoft Office 365 API Tools version 1.3.41104.1](https://visualstudiogallery.msdn.microsoft.com/a15b85e6-69a7-4fdf-adda-a38066bb5155). 
+   Note: It is important to ensure the Office 365 API Tools are updated to the most recent version. Failure to do so may cause issues with running the sample. Again the most recent tools are located here: [Microsoft Office 365 API Tools version 1.3.41104.1](http://aka.ms/k0534n). 
 ### Register app to consume Office 365 APIs ###
 
-You can do this via the Office 365 API Tools for Visual Studio (which automates the registration process). Be sure to download and install the [Office 365 API tools](https://visualstudiogallery.msdn.microsoft.com/a15b85e6-69a7-4fdf-adda-a38066bb5155) from the Visual Studio Gallery.
+You can do this via the Office 365 API Tools for Visual Studio (which automates the registration process). Be sure to download and install the [Office 365 API tools](http://aka.ms/k0534n) from the Visual Studio Gallery.
 
    1. Build the project. This will restore the NuGet packages for this solution. 
    2. In the Solution Explorer window, choose **O365-APIs-Start-ASPNET-MVC** project -> **Add** -> **Connected Service**.
@@ -85,7 +86,7 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
  In order to complete this procedure, you're going to need to log into the Microsoft Azure management portal. To do this you must have an Azure subscription. A free trial is available if you do not currently have one.
  You can sign up here: http://azure.microsoft.com/en-us/pricing/free-trial/. You must also ensure you have already completed the Register app to consume Office 365 APIs procedure.
 
- **Important**: You will also need to ensure your Azure subscription is bound to your Office 365 tenant. To do this see the Active Directory team's blog post, [Creating and Managing Multiple Windows Azure Active Directories](http://blogs.technet.com/b/ad/archive/2013/11/08/creating-and-managing-multiple-windows-azure-active-directories.aspx). The section **Adding a new directory** will explain how to do this. You can also read [Set up Azure Active Directory access for your Developer Site](http://msdn.microsoft.com/en-us/office/office365/howto/setup-development-environment#bk_CreateAzureSubscription) for more information.
+ **Important**: You will also need to ensure your Azure subscription is bound to your Office 365 tenant. To do this see the Active Directory team's blog post, [Creating and Managing Multiple Windows Azure Active Directories](http://aka.ms/lrb3ln). The section **Adding a new directory** will explain how to do this. You can also read [Set up Azure Active Directory access for your Developer Site](http://aka.ms/fv273q) for more information.
 
  To retrieve your Office 365 tenant ID:
 
