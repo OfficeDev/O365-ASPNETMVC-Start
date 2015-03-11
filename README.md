@@ -11,7 +11,7 @@
 
 ## Overview ##
 
-This sample uses the [Office 365 APIs client libraries](http://msdn.microsoft.com/en-us/office/office365/howto/platform-development-overview) to demonstrate basic operations against the Calendar, Contacts, Mail, and Files (OneDrive for Business) service endpoints in Office 365 from a single-tenant ASP.NET MVC 5 application.  
+This sample uses the [Office 365 APIs client libraries](http://aka.ms/kbwa5c) to demonstrate basic operations against the Calendar, Contacts, Mail, and Files (OneDrive for Business) service endpoints in Office 365 from a single-tenant ASP.NET MVC 5 application.  
 
 Below are the operations that you can perform with this sample:
 
@@ -84,7 +84,7 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
 ### Get your Office 365 tenant ID from Microsoft Azure ###
 
  In order to complete this procedure, you're going to need to log into the Microsoft Azure management portal. To do this you must have an Azure subscription. A free trial is available if you do not currently have one.
- You can sign up here: http://azure.microsoft.com/en-us/pricing/free-trial/. You must also ensure you have already completed the Register app to consume Office 365 APIs procedure.
+ You can sign up here: http://aka.ms/vbkuv6. You must also ensure you have already completed the Register app to consume Office 365 APIs procedure.
 
  **Important**: You will also need to ensure your Azure subscription is bound to your Office 365 tenant. To do this see the Active Directory team's blog post, [Creating and Managing Multiple Windows Azure Active Directories](http://aka.ms/lrb3ln). The section **Adding a new directory** will explain how to do this. You can also read [Set up Azure Active Directory access for your Developer Site](http://aka.ms/fv273q) for more information.
 
