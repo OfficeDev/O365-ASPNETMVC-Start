@@ -8,9 +8,9 @@ namespace O365_APIs_Start_ASPNET_MVC.Utils
     public class SettingsHelper
     {
 
-        private static string _clientId = ConfigurationManager.AppSettings["ida:ClientId"] ?? ConfigurationManager.AppSettings["ida:ClientID"];
-        private static string _appKey = ConfigurationManager.AppSettings["ida:AppKey"] ?? ConfigurationManager.AppSettings["ida:Password"];
-        private static string _authorizationUri = ConfigurationManager.AppSettings["ida:AuthorizationUri"];
+        private static string _clientId = ConfigurationManager.AppSettings["ida:ClientId"];
+        private static string _clientSecret = ConfigurationManager.AppSettings["ida:ClientSecret"];
+        private static string _authorizationUri = ConfigurationManager.AppSettings["ida:AADInstance"];
         private static string _graphResourceId = ConfigurationManager.AppSettings["ida:GraphResourceId"];
         private static string _tenantId = ConfigurationManager.AppSettings["ida:TenantID"];
 
@@ -31,7 +31,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Utils
         {
             get
             {
-                return _appKey;
+                return _clientSecret;
             }
         }
 
