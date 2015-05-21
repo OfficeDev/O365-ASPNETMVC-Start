@@ -18,7 +18,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
         {
             try
             {
-                // Get exchangeclient
+                // Get Outlook Services client
                 var outlookServicesClient = await AuthenticationHelper.EnsureOutlookServicesClientCreatedAsync("Contacts");
 
                 List<model.ContactItem> returnResults = new List<model.ContactItem>();
@@ -27,6 +27,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
                 var contactsResults = await (from i in outlookServicesClient.Me.Contacts
                                              orderby i.FileAs
                                              select i).Skip((pageNo - 1) * pageSize).Take(pageSize).ExecuteAsync();
+
                 var contacts = contactsResults.CurrentPage;
 
                 foreach (IContact serverContactItem in contacts)
