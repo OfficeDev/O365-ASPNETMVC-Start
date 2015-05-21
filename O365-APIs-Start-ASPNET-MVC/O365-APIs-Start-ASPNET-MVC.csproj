@@ -92,7 +92,7 @@
       <HintPath>..\packages\Microsoft.Office365.OAuth.AspNet.1.0.21\lib\net45\Microsoft.Office365.OAuth.Web.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office365.OutlookServices.Portable">
-      <HintPath>..\..\..\..\..\..\PatSol\O365-APIs-Start-ASPNET-MVC\packages\Microsoft.Office365.OutlookServices.1.0.22\lib\portable-net40+sl5+wp8+win8+MonoAndroid10+MonoTouch10+WindowsPhoneApp81\Microsoft.Office365.OutlookServices.Portable.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Office365.OutlookServices.1.0.22\lib\portable-net40+sl5+wp8+win8+MonoAndroid10+MonoTouch10+WindowsPhoneApp81\Microsoft.Office365.OutlookServices.Portable.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Office365.SharePoint">
       <HintPath>..\packages\Microsoft.Office365.SharePoint.1.0.22\lib\net40\Microsoft.Office365.SharePoint.dll</HintPath>
