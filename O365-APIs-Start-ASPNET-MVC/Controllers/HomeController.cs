@@ -17,22 +17,15 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
                 ViewBag.DidNotAddConnectedServices = false;
             }
             
-            string tenantID = ConfigurationManager.AppSettings["ida:TenantID"] ?? "" ;
-            Guid resultGuid;
-            
-            try
-            {
-                resultGuid = Guid.ParseExact(tenantID, "D");
-                ViewBag.TenantIDIsNull = false;
-            }
-            catch (ArgumentNullException) 
-            { 
-               ViewBag.TenantIDIsNull = true;
-            }   
-            catch (FormatException) 
+            bool isEmpty = String.IsNullOrEmpty(ConfigurationManager.AppSettings["ida:TenantID"]);
+
+            if (isEmpty)
             {
                 ViewBag.TenantIDIsNull = true;
             }
+            else
+                ViewBag.TenantIDIsNull = false;
+
             return View();
         }
     }
