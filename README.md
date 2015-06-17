@@ -68,7 +68,7 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
 	- (Files) - Read and write to your files (Write)
 	- (Users and Groups) – Sign you in and read your profile (Read)
    6. Choose the **App Properties** link in the Services Manager window. Make this app available to a Single Organization. 
-   7. After selecting **OK** in the Services Manager window, assemblies for connecting to Office 365 REST APIs will be added to your project and the following entries will be added to your appSettings in the web.config: ClientId, ClientSecret, TenantId, AADInstance.
+   7. After selecting **OK** in the Services Manager window, assemblies for connecting to Office 365 REST APIs will be added to your project and the following entries will be added to your appSettings in the web.config: ClientId, ClientSecret, AADInstance, and TenantId. You can use your tenant name for the value of the TenantId setting instead of using the tenant identifier.
    8. Build the solution. Nuget packages will be added to you project. Now you are ready to run the solution and sign in with your organizational account to Office 365.
 
 <a name="project"></a>
