@@ -8,6 +8,7 @@
 - [Project Files of Interest](#project)
 - [Troubleshooting](#troubleshooting)
 - [License](https://github.com/OfficeDev/Office-365-APIs-Starter-Project-for-ASPNETMVC/blob/master/LICENSE.txt)
+- [Questions and Comments](#questions-and-comments)
 
 ## Overview ##
 
@@ -139,6 +140,14 @@ An incorrect tenant identifier will return a 404 HTTP status code.
 Check that you are running the same version of the Microsoft Office 365 API Tools as the version used for this sample. 
 
 Version 1.0.34 of Microsoft.Office365.OutlookServices.Portable contains a bug. This is the version installed by Microsoft Office 365 API Tools version 1.4.50428.2. Use 1.0.22 until a newer version is released.  
+
+
+## Questions and Comments
+
+We'd love to get your feedback on the O365-ASPNETMVC-Start project. You can send your questions and suggestions to us in the [Issues](https://github.com/OfficeDev/O365-ASPNETMVC-Start/issues) section of this repository.
+
+Questions about Office 365 development in general should be posted to [Stack Overflow](http://stackoverflow.com/questions/tagged/Office365+API). Make sure that your questions or comments are tagged with [Office365] and [API].
+
 
 ## Copyright ##
 
