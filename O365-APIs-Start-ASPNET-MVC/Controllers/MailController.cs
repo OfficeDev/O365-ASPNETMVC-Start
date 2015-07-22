@@ -125,7 +125,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
             
             try
             {
-                IMessage deletedMail = await _mailOperations.DeleteMailItemAsync(id);
+                await _mailOperations.DeleteMailItemAsync(id);
             }
             catch (Exception)
             {

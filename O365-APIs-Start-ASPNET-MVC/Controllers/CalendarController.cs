@@ -143,13 +143,13 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
             try
             {
                 
-                IEvent updatedEvent = await _calenderOperations.UpdateCalendarEventAsync(id, 
-                                                                                                     collection["Location"], 
-                                                                                                     collection["Body"], 
-                                                                                                     collection["Attendees"], 
-                                                                                                     collection["Subject"], 
-                                                                                                     DateTimeOffset.Parse(collection["StartDate"]), 
-                                                                                                     DateTimeOffset.Parse(collection["EndDate"]));
+                await _calenderOperations.UpdateCalendarEventAsync( id, 
+                                                                    collection["Location"], 
+                                                                    collection["Body"], 
+                                                                    collection["Attendees"], 
+                                                                    collection["Subject"], 
+                                                                    DateTimeOffset.Parse(collection["StartDate"]), 
+                                                                    DateTimeOffset.Parse(collection["EndDate"]));
             }
             catch (Exception)
             {
@@ -174,7 +174,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
             _O365ServiceOperationFailed = false;
             try
             {
-                IEvent deletedEvent = await _calenderOperations.DeleteCalendarEventAsync(id);
+                await _calenderOperations.DeleteCalendarEventAsync(id);
             }
             catch (Exception)
             {

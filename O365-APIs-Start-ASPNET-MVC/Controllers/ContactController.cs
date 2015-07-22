@@ -133,14 +133,14 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
 
             try
             {
-                IContact updatedContact = await _contactOperations.UpdateContactItemAsync(id,
-                                                                                                      collection["FileAs"],
-                                                                                                      collection["GivenName"],
-                                                                                                      collection["Surname"],
-                                                                                                      collection["JobTitle"],
-                                                                                                      collection["Email"],
-                                                                                                      collection["MobilePhone"],
-                                                                                                      collection["BusinessPhone"]);
+                await _contactOperations.UpdateContactItemAsync(id,
+                                                                collection["FileAs"],
+                                                                collection["GivenName"],
+                                                                collection["Surname"],
+                                                                collection["JobTitle"],
+                                                                collection["Email"],
+                                                                collection["MobilePhone"],
+                                                                collection["BusinessPhone"]);
             }
 
             catch (Exception)
@@ -168,7 +168,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Controllers
 
             try
             {
-                bool success = await _contactOperations.DeleteContactAsync(id);
+                await _contactOperations.DeleteContactAsync(id);
             }
             catch (Exception)
             {

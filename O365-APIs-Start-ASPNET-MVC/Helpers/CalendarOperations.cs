@@ -178,7 +178,7 @@ namespace O365_APIs_Start_ASPNET_MVC.Helpers
             eventToUpdate.Attendees.Clear();
             string[] splitter = { ";" };
             var splitAttendeeString = Attendees.Split(splitter, StringSplitOptions.RemoveEmptyEntries);
-            Attendee[] attendees = new Attendee[splitAttendeeString.Length];
+
             for (int i = 0; i < splitAttendeeString.Length; i++)
             {
                 Attendee newAttendee = new Attendee();
