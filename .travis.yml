@@ -1,7 +1,7 @@
 language: csharp
 solution: O365-APIs-Start-ASPNET-MVC.sln
 install:
-  - nuget restore O365-APIs-Start-ASPNET-MVC.sln
+  - nuget restore O365-APIs-Start-ASPNET-MVC.sln -verbosity detailed
 mono: 
   - latest
 script:
