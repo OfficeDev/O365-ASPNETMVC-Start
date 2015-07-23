@@ -1,0 +1,8 @@
+language: csharp
+solution: O365-APIs-Start-ASPNET-MVC.sln
+install:
+  - nuget restore O365-APIs-Start-ASPNET-MVC.sln
+mono: 
+  - latest
+script:
+  - xbuild /p:Configuration=Debug O365-APIs-Start-ASPNET-MVC.sln
