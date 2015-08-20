@@ -121,11 +121,11 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
    - [```Shared/_LoginPartial.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Shared/_LoginPartial.cshtml)
 
 **Other**
-   - [```RouteConfig.cs```]()
-   - [```web.config```]()
-   - [```Startup.cs```]()
-   - [```Startup.Auth.cs```]()
-   - [```packages.config```]()
+   - [```RouteConfig.cs```](O365-APIs-Start-ASPNET-MVC/App_Start/RouteConfig.cs)
+   - [```web.config```](O365-APIs-Start-ASPNET-MVC/Web.config)
+   - [```Startup.cs```](O365-APIs-Start-ASPNET-MVC/Startup.cs)
+   - [```Startup.Auth.cs```](O365-APIs-Start-ASPNET-MVC/App_Start/Startup.Auth.cs)
+   - [```packages.config```](O365-APIs-Start-ASPNET-MVC/packages.config)
 
 ## Troubleshooting ##
 
