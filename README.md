@@ -77,56 +77,56 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
 ## Project Files of Interest ##
 
 **Controllers**
-   - AccountController.cs
-   - CalendarController.cs
-   - ContactController.cs
-   - FileController.cs
-   - HomeController.cs
-   - MailContoller.cs
+   - [```AccountController.cs```](O365-APIs-Start-ASPNET-MVC/Controllers/AccountController.cs)
+   - [```CalendarController.cs```](O365-APIs-Start-ASPNET-MVC/Controllers/CalendarController.cs)
+   - [```ContactController.cs```](O365-APIs-Start-ASPNET-MVC/Controllers/ContactController.cs)
+   - [```FileController.cs```](O365-APIs-Start-ASPNET-MVC/Controllers/FileController.cs)
+   - [```HomeController.cs```](O365-APIs-Start-ASPNET-MVC/Controllers/HomeController.cs)
+   - [```MailContoller.cs```](O365-APIs-Start-ASPNET-MVC/Controllers/MailController.cs)
 
 **Helper Classes**
-   - AuthenticationHelper.cs
-   - CalendarOperations.cs
-   - ContactOperations.cs
-   - FileOperations.cs
-   - MailOperations.cs
+   - [```AuthenticationHelper.cs```]()
+   - [```CalendarOperations.cs```]()
+   - [```ContactOperations.cs```]()
+   - [```FileOperations.cs```]()
+   - [```MailOperations.cs```]()
  
 **Models**
-   - CalendarEvent.cs
-   - ContactItem.cs
-   - FileItem.cs
-   - IdentityModels.cs
-   - MailItem.cs
+   - [```CalendarEvent.cs```]()
+   - [```ContactItem.cs```]()
+   - [```FileItem.cs```]()
+   - [```IdentityModels.cs```]()
+   - [```MailItem.cs```]()
 
 **Utils Folder** 
-   - SettingsHelper.cs
+   - [```SettingsHelper.cs```]()
 
 **Views**
-   - Calendar/Create.cshtml
-   - Calendar/Delete.cshtml
-   - Calendar/Edit.cshtml
-   - Calendar/Index.cshtml
-   - Contact/Create.cshtml
-   - Contact/Delete.cshtml
-   - Contact/Edit.cshtml
-   - Contact/Index.cshtml
-   - File/Create.cshtml
-   - File/Delete.cshtml
-   - File/Edit.cshtml
-   - File/Index.cshtml
-   - Home/Index.cshtml
-   - Mail/Create.cshtml
-   - Mail/Delete.cshtml
-   - Mail/Index.cshtml
-   - Shared/_Layout.cshtml
-   - Shared/_LoginPartial.cshtml
+   - [```Calendar/Create.cshtml```]()
+   - [```Calendar/Delete.cshtml```]()
+   - [```Calendar/Edit.cshtml```]()
+   - [```Calendar/Index.cshtml```]()
+   - [```Contact/Create.cshtml```]()
+   - [```Contact/Delete.cshtml```]()
+   - [```Contact/Edit.cshtml```]()
+   - [```Contact/Index.cshtml```]()
+   - [```File/Create.cshtml```]()
+   - [```File/Delete.cshtml```]()
+   - [```File/Edit.cshtml```]()
+   - [```File/Index.cshtml```]()
+   - [```Home/Index.cshtml```]()
+   - [```Mail/Create.cshtml```]()
+   - [```Mail/Delete.cshtml```]()
+   - [```Mail/Index.cshtml```]()
+   - [```Shared/_Layout.cshtml```]()
+   - [```Shared/_LoginPartial.cshtml```]()
 
 **Other**
-   - RouteConfig.cs
-   - web.config
-   - Startup.cs
-   - Startup.Auth.cs
-   - packages.config
+   - [```RouteConfig.cs```]()
+   - [```web.config```]()
+   - [```Startup.cs```]()
+   - [```Startup.Auth.cs```]()
+   - [```packages.config```]()
 
 ## Troubleshooting ##
 
