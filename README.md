@@ -85,11 +85,11 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
    - [```MailContoller.cs```](O365-APIs-Start-ASPNET-MVC/Controllers/MailController.cs)
 
 **Helper Classes**
-   - [```AuthenticationHelper.cs```]()
-   - [```CalendarOperations.cs```]()
-   - [```ContactOperations.cs```]()
-   - [```FileOperations.cs```]()
-   - [```MailOperations.cs```]()
+   - [```AuthenticationHelper.cs```](O365-APIs-Start-ASPNET-MVC/Helpers/AuthenticationHelper.cs)
+   - [```CalendarOperations.cs```](O365-APIs-Start-ASPNET-MVC/Helpers/CalendarOperations.cs)
+   - [```ContactOperations.cs```](O365-APIs-Start-ASPNET-MVC/Helpers/ContactOperations.cs)
+   - [```FileOperations.cs```](O365-APIs-Start-ASPNET-MVC/Helpers/FileOperations.cs)
+   - [```MailOperations.cs```](O365-APIs-Start-ASPNET-MVC/Helpers/MailOperations.cs)
  
 **Models**
    - [```CalendarEvent.cs```]()
