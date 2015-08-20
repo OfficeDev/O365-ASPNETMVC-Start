@@ -92,11 +92,10 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
    - [```MailOperations.cs```](O365-APIs-Start-ASPNET-MVC/Helpers/MailOperations.cs)
  
 **Models**
-   - [```CalendarEvent.cs```]()
-   - [```ContactItem.cs```]()
-   - [```FileItem.cs```]()
-   - [```IdentityModels.cs```]()
-   - [```MailItem.cs```]()
+   - [```CalendarEvent.cs```](O365-APIs-Start-ASPNET-MVC/Models/CalendarEvent.cs)
+   - [```ContactItem.cs```](O365-APIs-Start-ASPNET-MVC/Models/ContactItem.cs)
+   - [```FileItem.cs```](O365-APIs-Start-ASPNET-MVC/Models/FileItem.cs)
+   - [```MailItem.cs```](O365-APIs-Start-ASPNET-MVC/Models/MailItem.cs)
 
 **Utils Folder** 
    - [```SettingsHelper.cs```]()
