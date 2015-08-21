@@ -77,56 +77,55 @@ You can do this via the Office 365 API Tools for Visual Studio (which automates 
 ## Project Files of Interest ##
 
 **Controllers**
-   - AccountController.cs
-   - CalendarController.cs
-   - ContactController.cs
-   - FileController.cs
-   - HomeController.cs
-   - MailContoller.cs
+   - [```AccountController.cs```](O365-APIs-Start-ASPNET-MVC/Controllers/AccountController.cs)
+   - [```CalendarController.cs```](O365-APIs-Start-ASPNET-MVC/Controllers/CalendarController.cs)
+   - [```ContactController.cs```](O365-APIs-Start-ASPNET-MVC/Controllers/ContactController.cs)
+   - [```FileController.cs```](O365-APIs-Start-ASPNET-MVC/Controllers/FileController.cs)
+   - [```HomeController.cs```](O365-APIs-Start-ASPNET-MVC/Controllers/HomeController.cs)
+   - [```MailContoller.cs```](O365-APIs-Start-ASPNET-MVC/Controllers/MailController.cs)
 
 **Helper Classes**
-   - AuthenticationHelper.cs
-   - CalendarOperations.cs
-   - ContactOperations.cs
-   - FileOperations.cs
-   - MailOperations.cs
+   - [```AuthenticationHelper.cs```](O365-APIs-Start-ASPNET-MVC/Helpers/AuthenticationHelper.cs)
+   - [```CalendarOperations.cs```](O365-APIs-Start-ASPNET-MVC/Helpers/CalendarOperations.cs)
+   - [```ContactOperations.cs```](O365-APIs-Start-ASPNET-MVC/Helpers/ContactOperations.cs)
+   - [```FileOperations.cs```](O365-APIs-Start-ASPNET-MVC/Helpers/FileOperations.cs)
+   - [```MailOperations.cs```](O365-APIs-Start-ASPNET-MVC/Helpers/MailOperations.cs)
  
 **Models**
-   - CalendarEvent.cs
-   - ContactItem.cs
-   - FileItem.cs
-   - IdentityModels.cs
-   - MailItem.cs
+   - [```CalendarEvent.cs```](O365-APIs-Start-ASPNET-MVC/Models/CalendarEvent.cs)
+   - [```ContactItem.cs```](O365-APIs-Start-ASPNET-MVC/Models/ContactItem.cs)
+   - [```FileItem.cs```](O365-APIs-Start-ASPNET-MVC/Models/FileItem.cs)
+   - [```MailItem.cs```](O365-APIs-Start-ASPNET-MVC/Models/MailItem.cs)
 
 **Utils Folder** 
-   - SettingsHelper.cs
+   - [```SettingsHelper.cs```](O365-APIs-Start-ASPNET-MVC/Utils/SettingsHelper.cs)
 
 **Views**
-   - Calendar/Create.cshtml
-   - Calendar/Delete.cshtml
-   - Calendar/Edit.cshtml
-   - Calendar/Index.cshtml
-   - Contact/Create.cshtml
-   - Contact/Delete.cshtml
-   - Contact/Edit.cshtml
-   - Contact/Index.cshtml
-   - File/Create.cshtml
-   - File/Delete.cshtml
-   - File/Edit.cshtml
-   - File/Index.cshtml
-   - Home/Index.cshtml
-   - Mail/Create.cshtml
-   - Mail/Delete.cshtml
-   - Mail/Index.cshtml
-   - Shared/_Layout.cshtml
-   - Shared/_LoginPartial.cshtml
+   - [```Calendar/Create.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Calendar/Create.cshtml)
+   - [```Calendar/Delete.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Calendar/Delete.cshtml)
+   - [```Calendar/Edit.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Calendar/Edit.cshtml)
+   - [```Calendar/Index.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Calendar/Index.cshtml)
+   - [```Contact/Create.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Contact/Create.cshtml)
+   - [```Contact/Delete.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Contact/Delete.cshtml)
+   - [```Contact/Edit.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Contact/Edit.cshtml)
+   - [```Contact/Index.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Contact/Index.cshtml)
+   - [```File/Create.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/File/Create.cshtml)
+   - [```File/Delete.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/File/Delete.cshtml)
+   - [```File/Edit.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/File/Edit.cshtml)
+   - [```File/Index.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/File/Index.cshtml)
+   - [```Home/Index.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Home/Index.cshtml)
+   - [```Mail/Create.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Mail/Create.cshtml)
+   - [```Mail/Delete.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Mail/Delete.cshtml)
+   - [```Mail/Index.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Mail/Index.cshtml)
+   - [```Shared/_Layout.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Shared/_Layout.cshtml)
+   - [```Shared/_LoginPartial.cshtml```](O365-APIs-Start-ASPNET-MVC/Views/Shared/_LoginPartial.cshtml)
 
 **Other**
-   - RouteConfig.cs
-   - web.config
-   - Startup.cs
-   - Startup.Auth.cs
-   - packages.config
+   - [```RouteConfig.cs```](O365-APIs-Start-ASPNET-MVC/App_Start/RouteConfig.cs)
+   - [```web.config```](O365-APIs-Start-ASPNET-MVC/Web.config)
+   - [```Startup.cs```](O365-APIs-Start-ASPNET-MVC/Startup.cs)
+   - [```Startup.Auth.cs```](O365-APIs-Start-ASPNET-MVC/App_Start/Startup.Auth.cs)
+   - [```packages.config```](O365-APIs-Start-ASPNET-MVC/packages.config)
 
 ## Troubleshooting ##
 
