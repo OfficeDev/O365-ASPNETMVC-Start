@@ -1,4 +1,4 @@
-﻿# Office 365 Starter Project for ASP.NET MVC #
+﻿# [DEPRECATED] Office 365 Starter Project for ASP.NET MVC #
 
 **Table of Contents**
 
